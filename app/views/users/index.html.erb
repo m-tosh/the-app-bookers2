@@ -25,22 +25,20 @@
       <table class='table table-hover table-inverse'>
         <thead>
           <tr>
+            <th>image</th>
+            <th>name</th>
             <th></th>
-            <th>Title</th>
-            <th>Opinion</th>
             <th colspan="3"></th>
           </tr>
         </thead>
         <tbody>
-          <% @user_books.each do |a_book| %>
+          <% @users.each do |a_user| %>
           <tr>
             <td>
-              <%= link_to user_path(a_book.user.id) do %>
-                <%= attachment_image_tag a_book.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
-              <% end %>
+              <%= attachment_image_tag a_user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
             </td>
-            <td><%= link_to a_book.title, book_path(a_book.id) %></td>
-            <td><%= a_book.body %></td>
+            <td><%= a_user.name %></td>
+            <td><%= link_to "Show", user_path(a_user.id) %></td>
           </tr>
           <% end %>
         </tbody>

@@ -32,7 +32,7 @@
           </tr>
         </thead>
         <tbody>
-          <%= @books.each do |a_book| %>
+          <% @books.each do |a_book| %>
           <tr>
             <td>
               <%= link_to user_path(a_book.user.id) do %>
