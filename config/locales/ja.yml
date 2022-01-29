@@ -1,0 +1,7 @@
+ja:
+  enums:
+    phone:
+      os_type:
+        ios: あいふぉん
+        android: あんどろいど
+        other: 他

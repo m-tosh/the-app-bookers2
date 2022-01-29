@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_21_145915) do
+ActiveRecord::Schema.define(version: 2022_01_22_131607) do
 
   create_table "books", force: :cascade do |t|
     t.string "title"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2022_01_21_145915) do
 
   create_table "phones", force: :cascade do |t|
     t.string "name"
-    t.integer "os_type"
+    t.integer "os_type", limit: 1, default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
