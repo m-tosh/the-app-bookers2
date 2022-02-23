@@ -44,6 +44,14 @@ RSpec.describe 'Userモデルのテスト', type: :model do
         is_expected.to eq false
       end
     end
+
+    context 'プロフィール画像' do
+      it '画像が登録可能であること: uploadが認識されれば○' do
+        user.profile_image = Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/images/test.jpg'))
+        is_expected.to eq true
+      end
+    end
+
   end
 
   describe 'アソシエーションのテスト' do
