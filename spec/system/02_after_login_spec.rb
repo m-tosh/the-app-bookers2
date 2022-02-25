@@ -377,8 +377,10 @@ describe '[STEP2] ユーザログイン後のテスト' do
       before do
         @user_old_name = user.name
         @user_old_intrpduction = user.introduction
+        @user_old_profile_image = nil
         fill_in 'user[name]', with: Faker::Lorem.characters(number: 9)
         fill_in 'user[introduction]', with: Faker::Lorem.characters(number: 19)
+        attach_file 'user[profile_image]', File.join(Rails.root, 'spec/fixtures/images/test.jpg')
         click_button 'Update User'
       end
 
@@ -387,6 +389,9 @@ describe '[STEP2] ユーザログイン後のテスト' do
       end
       it 'introductionが正しく更新される' do
         expect(user.reload.introduction).not_to eq @user_old_intrpduction
+      end
+      it 'profile_imageが正しく更新される' do
+        expect(user.reload.profile_image).not_to eq @user_old_profile_image
       end
       it 'リダイレクト先が、自分のユーザ詳細画面になっている' do
         expect(current_path).to eq '/users/' + user.id.to_s
