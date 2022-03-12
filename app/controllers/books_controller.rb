@@ -16,7 +16,7 @@ class BooksController < ApplicationController
   def index
     @book ||= Book.new
     @user = User.find(current_user.id)
-    @books = Book.includes(:user)
+    @books = Book.includes(:user).page(params[:page]).per(5)
   end
 
   def show
