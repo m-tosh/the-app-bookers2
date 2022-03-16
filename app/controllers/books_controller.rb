@@ -8,7 +8,7 @@ class BooksController < ApplicationController
       redirect_to book_path(@book.id)
     else
       @user = User.find(current_user.id)
-      @books = Book.all
+      @books = Book.includes(:user).page(params[:page]).per(5)
       render :index
     end
   end
