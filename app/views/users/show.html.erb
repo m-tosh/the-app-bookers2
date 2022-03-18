@@ -21,7 +21,7 @@
           <tr>
             <td>
               <%= link_to user_path(a_book.user.id) do %>
-                <%= attachment_image_tag a_book.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
+                <%= image_tag a_book.user.profile_image, size: '60x60', fallback: 'no_image.jpg' if a_book.user.profile_image.attached? %>                
               <% end %>
             </td>
             <td><%= link_to a_book.title, book_path(a_book.id) %></td>
