@@ -24,14 +24,15 @@
         <div class="col-sm">
           Description
         </div>
+        <div class="col-sm">
+          いいね
+        </div>
       </div>
       <div class='jscroll'>
         <% @books.each do |a_book| %>
           <div class="row border-bottom py-1">
             <div class="col-sm">
               <%= link_to user_path(a_book.user.id) do %>
-                <%#= attachment_image_tag a_book.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
-                <%#= image_tag a_book.user.profile_image, size: '60x60', fallback: 'no_image.jpg' if a_book.user.profile_image.attached? %>
                 <% if a_book.user.profile_image.attached? %>
                   <%= image_tag a_book.user.profile_image, size: '60x60' %>
                 <% else %>
@@ -44,6 +45,14 @@
             </div>
             <div class="col-sm">
               <%= a_book.body %>
+            </div>
+            <div class="col-sm">
+              <% if favorite = a_book.favorite.find_by(user_id: current_user.id) %>
+                <%= link_to "いいね済", book_favorite_path(a_book.id), method: :delete, style: "color: red;" %>
+              <% else %>
+                <%= link_to "いいね", book_favorite_path(a_book), method: :post %>
+              <% end %>
+              <%= a_book.favorite.size %>
             </div>
           </div>
         <% end %>

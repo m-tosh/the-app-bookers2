@@ -13,7 +13,7 @@ class BooksController < ApplicationController
 
   def index
     @book ||= Book.new
-    @books = Book.includes(:user).page(params[:page]).per(5)
+    @books = Book.includes(:user, :favorite).page(params[:page]).per(5)
   end
 
   def show

@@ -1,5 +1,6 @@
 class Book < ApplicationRecord
   belongs_to :user
+  has_many :favorite, dependent: :destroy
   has_one_attached :image
 
   validates :title, presence: true
