@@ -46,13 +46,12 @@
             <div class="col-sm">
               <%= a_book.body %>
             </div>
-            <div class="col-sm">
-              <% if favorite = a_book.favorite.find_by(user_id: current_user.id) %>
-                <%= link_to "いいね済", book_favorite_path(a_book.id), method: :delete, style: "color: red;" %>
+            <div class="col-sm" id="favorite_book_<%= a_book.id %>">
+              <% if a_book.favorite.find_by(user_id: current_user.id) %>
+                <%= render '/favorites/thumb_done', book: a_book %>
               <% else %>
-                <%= link_to "いいね", book_favorite_path(a_book), method: :post %>
+                <%= render '/favorites/thumb_yet', book: a_book %>
               <% end %>
-              <%= a_book.favorite.size %>
             </div>
           </div>
         <% end %>

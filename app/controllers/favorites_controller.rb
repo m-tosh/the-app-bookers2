@@ -1,14 +1,14 @@
 class FavoritesController < ApplicationController
   def create
     Favorite.create(favorite_params)
-    redirect_to books_path
+    @book = Book.find(params[:book_id])
   end
 
   def destroy
     if favorite = Favorite.find_by(favorite_params)
       favorite.destroy
     end
-    redirect_to books_path
+    @book = Book.find(params[:book_id])
   end
 
   private
