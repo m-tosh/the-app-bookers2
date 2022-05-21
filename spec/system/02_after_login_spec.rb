@@ -59,6 +59,10 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(page).to have_content book.body
         expect(page).to have_content other_book.body
       end
+      it 'いいねのリンクが正しい' do
+        expect(page).to have_link '', href: book_favorite_path(book)
+        expect(page).to have_css('i.far')
+      end
     end
 
     context 'サイドバーの確認' do
@@ -101,6 +105,20 @@ describe '[STEP2] ユーザログイン後のテスト' do
       it 'リダイレクト先が、保存できた投稿の詳細画面になっている' do
         click_button 'Create Book'
         expect(current_path).to eq '/books/' + Book.last.id.to_s
+      end
+    end
+  end
+
+  describe 'いいね機能' do
+    let!(:favorite) { create(:favorite, book: book, user: user) }
+
+    before do  
+      visit books_path
+    end
+
+    context 'いいねリンクの表示確認' do
+      it 'いいね済の表示が正しい' do
+        expect(page).to have_css('i.fas')
       end
     end
   end
